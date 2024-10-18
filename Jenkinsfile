@@ -45,7 +45,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker-credential') {
+                    withDockerRegistry(credentialsId: 'docker-credential-alphaka') {
                         sh 'docker push alphaka/config-service:latest'
                     }
                 }

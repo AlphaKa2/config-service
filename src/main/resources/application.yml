@@ -9,31 +9,31 @@ spring:
 # local ???
 ---
 
-  spring:
-    config:
-      activate:
-        on-profile: local
-      import: file:.env[.properties]
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: file:.env[.properties]
 
-    cloud:
-      config:
-        server:
-          git:
-            uri: "${LOCAL_CLOUD_CONFIG_URI}"
+  cloud:
+    config:
+      server:
+        git:
+          uri: "${LOCAL_CLOUD_CONFIG_URI}"
 
 
 # develop ???
 ---
-  spring:
+spring:
+  config:
+    activate:
+      on-profile: develop
+  cloud:
     config:
-      activate:
-        on-profile: develop
-    cloud:
-      config:
-        server:
-          git:
-            uri: "${DEVELOP_CLOUD_CONFIG_URI}"
-            private-key: "${DEVELOP_CLOUD_CONFIG_PRIVATE_KEY}"
+      server:
+        git:
+          uri: "${DEVELOP_CLOUD_CONFIG_URI}"
+          private-key: "${DEVELOP_CLOUD_CONFIG_PRIVATE_KEY}"
 
-            default-label: main
-            ignore-local-ssh-settings: true
+          default-label: main
+          ignore-local-ssh-settings: true
