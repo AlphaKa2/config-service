@@ -52,5 +52,27 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                script {
+                    withCredentials([
+                            sshUserPrivateKey(credentialsId: 'jenkins-ssh', keyFileVariable: 'SSH_KEY'),
+                            string(credentialsId: 'vm-cloud-address', variable: 'VM_ADDRESS')
+                    ]) {
+
+                        // 미리 작성해둔 deploy.sh 실행
+                        sh '''
+                            /var/jenkins_home/scripts/deploy.sh \\
+                            "$VM_ADDRESS" \\
+                            "$SSH_KEY" \\
+                            "alphaka/config-service" \\
+                            "config-service" \\
+                            "8888"
+                        '''
+                    }
+                }
+            }
+        }
+
     }
 }
